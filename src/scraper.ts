@@ -78,7 +78,10 @@ export async function scrapeGoogleMaps(
   city: string,
   maxResults = 60
 ): Promise<ScrapedProspect[]> {
-  const browser = await chromium.launch({ headless: true });
+  const browser = await chromium.launch({
+  headless: true,
+  args: ["--disable-dev-shm-usage", "--no-sandbox"],
+});
   const context = await browser.newContext({
     locale: "fr-FR",
     userAgent:
